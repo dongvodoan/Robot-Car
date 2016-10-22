@@ -10,7 +10,10 @@ int Motor_A_Forward = 11;
 
 // Motor B
 int Motor_B_Reverse = 12;   
-int Motor_B_Forward = 13;   
+int Motor_B_Forward = 13;
+
+// Pin Led
+int Pin_Led = 8;
 
 void setup() {
   // put your setup code here, to run once:
@@ -22,6 +25,8 @@ void setup() {
 
   pinMode(Motor_B_Forward, OUTPUT);
   pinMode(Motor_B_Reverse, OUTPUT);
+
+  pinMode(Pin_Led, OUTPUT);
 }
 
 // Function stop car
@@ -69,8 +74,26 @@ void turnRight(){
         digitalWrite(Motor_B_Forward, HIGH);
   }
 
+// Function turn on light
+void turnOn(){
+  digitalWrite(Pin_Led, HIGH);
+  }
+
+// Function turn off light
+void turnOff(){
+  digitalWrite(Pin_Led, LOW);
+  }
+
 // Function handle command
 void handleCommand(String command){
+  // Control lights
+  if(command=="On"){     
+      turnOn();                                     // Turn on Lights
+  }
+  else if(command=="Off"){
+      turnOff();                                    // Turn off Lights
+  }
+  
   // Drive Car
   if(command=="Forward"){
       Forward();                                    // go to Forward
