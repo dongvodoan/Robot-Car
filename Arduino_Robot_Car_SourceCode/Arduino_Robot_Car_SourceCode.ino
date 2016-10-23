@@ -24,13 +24,22 @@ Servo servo2;
 // Servo control hand shift In or Out
 Servo servo3;
 
+// Servo control hand with hold or Throw
+Servo servo4;
+
 Servo servo;
 
-//Set start degrees of servo 1
+// Set start degrees of servo 1
 int i=90;
 
 // Set start degrees of serrvo 2
 int j=90;
+
+// Set start degrees of servo 3
+int k=90;
+
+// Set start degrees of servo 4
+int m=120;
 
 int Degrees;
 
@@ -42,6 +51,9 @@ int servo_Pin_2 = 5;
 
 // Servo 3 Pin Init
 int servo_Pin_3 = 4;
+
+// Servo 4 Pin init
+int servo_Pin_4 = 3;
 
 void setup() {
   // put your setup code here, to run once:
@@ -61,6 +73,8 @@ void setup() {
   servo2.attach(servo_Pin_2);
 
   servo3.attach(servo_Pin_3);
+
+  servo4.attach(servo_Pin_4);
 }
 
 // Function stop car
@@ -160,34 +174,50 @@ void Right(){
 
 // Function Shift Up the hand
 void Up(){
-  n=j;
+  Degrees=j;
   servo=servo2;
   countUp(110);
-  j=n;
+  j=Degrees;
 }
 
 // Function Shift Down the hand
 void Down(){
-  n=j;
+  Degrees=j;
   servo=servo2;
   countDown(55);
-  j=n;
+  j=Degrees;
 }
 
 // Function Shift In the hand
 void In(){
-  n=k;
+  Degrees=k;
   servo=servo3;
   countUp(180);
-  k=n;
+  k=Degrees;
 }
 
 // Function Shift Out the hand
 void Out(){
-  n=k;
+  Degrees=k;
   servo=servo3;
   countDown(0);
-  k=n;
+  k=Degrees;
+}
+
+// Function Throw
+void throwHand(){
+  Degrees=m;
+  servo=servo4;
+  countUp(180);
+  m=Degrees;
+}
+
+// Function Hold
+void holdHand(){
+  Degrees=m;
+  servo=servo4;
+  countDown(110);
+  m=Degrees;
 }
 
 // Function handle command
@@ -231,6 +261,12 @@ void handleCommand(String command){
     }
   else if(command=="In"){                           // shift in
     In();
+    }
+  else if(command=="Hold"){                         // Hold
+    holdHand();
+    }
+  else if(command=="Throw"){                        // Throw
+    throwHand();
     }
   else if(command=="Stop"){                         // Stop working
     Stop();                                    
