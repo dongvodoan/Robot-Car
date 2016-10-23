@@ -21,6 +21,9 @@ Servo servo1;
 // Servo control hand shift Up or Down
 Servo servo2;
 
+// Servo control hand shift In or Out
+Servo servo3;
+
 Servo servo;
 
 //Set start degrees of servo 1
@@ -36,6 +39,9 @@ int servo_Pin_1 = 6;
 
 // Servo 2 Pin Init
 int servo_Pin_2 = 5;
+
+// Servo 3 Pin Init
+int servo_Pin_3 = 4;
 
 void setup() {
   // put your setup code here, to run once:
@@ -53,6 +59,8 @@ void setup() {
   servo1.attach(servo_Pin_1);
 
   servo2.attach(servo_Pin_2);
+
+  servo3.attach(servo_Pin_3);
 }
 
 // Function stop car
@@ -166,6 +174,22 @@ void Down(){
   j=n;
 }
 
+// Function Shift In the hand
+void In(){
+  n=k;
+  servo=servo3;
+  countUp(180);
+  k=n;
+}
+
+// Function Shift Out the hand
+void Out(){
+  n=k;
+  servo=servo3;
+  countDown(0);
+  k=n;
+}
+
 // Function handle command
 void handleCommand(String command){
   // Control lights
@@ -201,6 +225,12 @@ void handleCommand(String command){
     }
   else if(command=="Down"){                         // shift down
     Down();
+    }
+  else if(command=="Out"){                          // shift out
+    Out();
+    }
+  else if(command=="In"){                           // shift in
+    In();
     }
   else if(command=="Stop"){                         // Stop working
     Stop();                                    
