@@ -1,4 +1,4 @@
-# Robot-Car
+# Robot-Car | Arduino | Android | Bluetooth
 
 ## Contributors
 	### Tan Tran Duy - Captain
