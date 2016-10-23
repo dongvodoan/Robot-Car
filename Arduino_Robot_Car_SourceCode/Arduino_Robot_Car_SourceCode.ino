@@ -15,15 +15,27 @@ int Motor_B_Forward = 13;
 // Pin Led
 int Pin_Led = 8;
 
+// Servo control hand shift Left or Right 
 Servo servo1;
+
+// Servo control hand shift Up or Down
+Servo servo2;
+
 Servo servo;
 
-//Set start degrees of servo;
+//Set start degrees of servo 1
 int i=90;
+
+// Set start degrees of serrvo 2
+int j=90;
+
 int Degrees;
 
-// Servo Pin Init
+// Servo 1 Pin Init
 int servo_Pin_1 = 6;
+
+// Servo 2 Pin Init
+int servo_Pin_2 = 5;
 
 void setup() {
   // put your setup code here, to run once:
@@ -39,6 +51,8 @@ void setup() {
   pinMode(Pin_Led, OUTPUT);
 
   servo1.attach(servo_Pin_1);
+
+  servo2.attach(servo_Pin_2);
 }
 
 // Function stop car
@@ -136,6 +150,22 @@ void Right(){
   i=Degrees;
 }
 
+// Function Shift Up the hand
+void Up(){
+  n=j;
+  servo=servo2;
+  countUp(110);
+  j=n;
+}
+
+// Function Shift Down the hand
+void Down(){
+  n=j;
+  servo=servo2;
+  countDown(55);
+  j=n;
+}
+
 // Function handle command
 void handleCommand(String command){
   // Control lights
@@ -165,6 +195,12 @@ void handleCommand(String command){
     }
   else if(command=="Right"){                        // shift right
     Right();
+    }
+  else if(command=="Up"){                           // shift up
+    Up();
+    }
+  else if(command=="Down"){                         // shift down
+    Down();
     }
   else if(command=="Stop"){                         // Stop working
     Stop();                                    
