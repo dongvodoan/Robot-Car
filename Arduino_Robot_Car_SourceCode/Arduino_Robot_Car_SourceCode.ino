@@ -1,19 +1,16 @@
 #include <Servo.h>
 String data;
 
-// Enable Motor
-int Motor_Enable = 2;
-
-// Motor A
-int Motor_A_Reverse = 10; 
-int Motor_A_Forward = 11; 
-
-// Motor B
-int Motor_B_Reverse = 12;   
-int Motor_B_Forward = 13;
+int enA = 5;
+int in1 = 7;
+int in2 = 4;
+// motor two
+int enB = 6;
+int in3 = 3;
+int in4 = 2;
 
 // Pin Led
-int Pin_Led = 8;
+int Pin_Led = 10;
 
 // Servo control hand shift Left or Right 
 Servo servo1;
@@ -44,27 +41,27 @@ int m=120;
 int Degrees;
 
 // Servo 1 Pin Init
-int servo_Pin_1 = 6;
+int servo_Pin_1 = 9;
 
 // Servo 2 Pin Init
-int servo_Pin_2 = 5;
+int servo_Pin_2 = 11;
 
 // Servo 3 Pin Init
-int servo_Pin_3 = 4;
+int servo_Pin_3 = 12;
 
 // Servo 4 Pin init
-int servo_Pin_4 = 3;
+int servo_Pin_4 = 13;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   
-  pinMode(Motor_Enable, OUTPUT);
-  pinMode(Motor_A_Forward, OUTPUT);
-  pinMode(Motor_A_Reverse, OUTPUT);
-
-  pinMode(Motor_B_Forward, OUTPUT);
-  pinMode(Motor_B_Reverse, OUTPUT);
+  pinMode(enA, OUTPUT);
+  pinMode(enB, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
 
   pinMode(Pin_Led, OUTPUT);
 
@@ -79,47 +76,67 @@ void setup() {
 
 // Function stop car
 void Stop(){
-        analogWrite(Motor_Enable, 0); 
-        digitalWrite(Motor_A_Reverse, LOW);
-        digitalWrite(Motor_A_Forward, LOW);
-        digitalWrite(Motor_B_Reverse, LOW);
-        digitalWrite(Motor_B_Forward, LOW);
+        digitalWrite(in1, LOW);
+        digitalWrite(in2, LOW);
+        // set speed to 0 out of possible range 0~255
+        analogWrite(enA, 0);
+        // turn on motor B
+        digitalWrite(in3, LOW);
+        digitalWrite(in4, LOW);
+        // set speed to 0 out of possible range 0~255
+        analogWrite(enB, 0);
   }
 
 // Function Forward car
 void Forward(){
-        analogWrite(Motor_Enable,200); 
-        digitalWrite(Motor_A_Reverse, LOW);
-        digitalWrite(Motor_A_Forward, HIGH); 
-        digitalWrite(Motor_B_Reverse, LOW);
-        digitalWrite(Motor_B_Forward, HIGH);
+       digitalWrite(in1, HIGH);
+       digitalWrite(in2, LOW);
+       // set speed to 170 out of possible range 0~255
+       analogWrite(enA, 170);
+      // turn on motor B
+       digitalWrite(in3, HIGH);
+       digitalWrite(in4, LOW);
+      // set speed to 170 out of possible range 0~255
+      analogWrite(enB, 170);
   }
 
 // Function Reverse car
 void Reverse(){
-        analogWrite(Motor_Enable, 150);
-        digitalWrite(Motor_A_Reverse, HIGH);
-        digitalWrite(Motor_A_Forward, LOW);
-        digitalWrite(Motor_B_Reverse, HIGH);
-        digitalWrite(Motor_B_Forward, LOW);
+       digitalWrite(in1, LOW);
+       digitalWrite(in2, HIGH);
+       // set speed to 170 out of possible range 0~255
+       analogWrite(enA, 170);
+       // turn on motor B
+       digitalWrite(in3, LOW);
+       digitalWrite(in4, HIGH);
+       // set speed to 170 out of possible range 0~255
+       analogWrite(enB, 170);
   }
   
 // Function turnleft car
 void turnLeft(){
-        analogWrite(Motor_Enable, 150);
-        digitalWrite(Motor_A_Reverse, LOW);
-        digitalWrite(Motor_A_Forward, HIGH);
-        digitalWrite(Motor_B_Reverse, HIGH);
-        digitalWrite(Motor_B_Forward, LOW);
+       digitalWrite(in1, HIGH);
+       digitalWrite(in2, LOW);
+       // set speed to 170 out of possible range 0~255
+       analogWrite(enA, 170);
+       // turn on motor B
+       digitalWrite(in3, LOW);
+       digitalWrite(in4, HIGH);
+       // set speed to 170 out of possible range 0~255
+       analogWrite(enB, 170);
   }
 
 // Function turnright car 
 void turnRight(){
-        analogWrite(Motor_Enable, 150);
-        digitalWrite(Motor_A_Reverse, HIGH);
-        digitalWrite(Motor_A_Forward, LOW);
-        digitalWrite(Motor_B_Reverse, LOW);
-        digitalWrite(Motor_B_Forward, HIGH);
+        digitalWrite(in1, LOW);
+        digitalWrite(in2, HIGH);
+        // set speed to 170 out of possible range 0~255
+        analogWrite(enA, 170);
+        // turn on motor B
+        digitalWrite(in3, HIGH);
+        digitalWrite(in4, LOW);
+        // set speed to 170 out of possible range 0~255
+        analogWrite(enB, 170);
   }
 
 // Function turn on light
@@ -176,7 +193,7 @@ void Right(){
 void Up(){
   Degrees=j;
   servo=servo2;
-  countUp(110);
+  countUp(100);
   j=Degrees;
 }
 
@@ -184,7 +201,7 @@ void Up(){
 void Down(){
   Degrees=j;
   servo=servo2;
-  countDown(55);
+  countDown(50);
   j=Degrees;
 }
 
